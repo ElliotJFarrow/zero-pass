@@ -1,0 +1,232 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #2c3e50;
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --error-color: #e74c3c;
+}
+
+body.dark {
+    --bg-color: #1a1a1a;
+    --text-color: #ecf0f1;
+    --primary-color: #5dade2;
+    --secondary-color: #27ae60;
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header styles */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 2rem;
+}
+
+/* Form styles */
+.generator-form {
+    background: var(--bg-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px var(--shadow-color);
+}
+
+.options-section {
+    margin-bottom: 2rem;
+}
+
+/* Checkbox options */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-option input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--primary-color);
+}
+
+/* Slider group */
+.slider-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.slider-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.slider-item input[type="range"] {
+    width: 100%;
+    height: 0.5rem;
+    -webkit-appearance: none;
+    background: var(--border-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.slider-item input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 1rem;
+    height: 1rem;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider-value {
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Output section */
+.output-section {
+    margin-top: 2rem;
+}
+
+.password-output {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.password-output input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.password-output input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Strength meter */
+.strength-meter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.strength-bar {
+    flex: 1;
+    height: 0.5rem;
+    background: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.strength-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    background: var(--secondary-color);
+    transition: width 0.3s ease-in-out;
+}
+
+/* Buttons */
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background: var(--primary-color);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background: var(--primary-color);
+    opacity: 0.9;
+}
+
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .slider-group {
+        grid-template-columns: 1fr;
+    }
+}

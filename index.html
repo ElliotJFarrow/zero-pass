@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Pass - Secure Password Generator</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <meta name="description" content="Zero Pass - A secure, client-side password generator that creates strong passwords without storing or transmitting any data. Generate custom passwords with options for length, character types, and minimum requirements.">
+    <meta name="keywords" content="password generator, secure passwords, client-side generation, strong passwords, password security">
+</head>
+<body class="light">
+    <div class="container">
+        <header>
+            <h1>Zero Pass</h1>
+            <p class="tagline">Zero compromise, zero storage, total password security</p>
+        </header>
+
+        <main>
+            <form id="passwordGenerator" class="generator-form">
+                <div class="options-section">
+                    <h2>Options</h2>
+                    <div class="checkbox-group">
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="lowercase" checked>
+                            <span>Lowercase letters (a-z)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="uppercase" checked>
+                            <span>Uppercase letters (A-Z)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="numbers" checked>
+                            <span>Numbers (0-9)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="symbols" checked>
+                            <span>Symbols (!@#$%^&*()_+-=[]{}|;:,.<>?)</span>
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="excludeAmbiguous" checked>
+                            <span>Exclude ambiguous characters (l, 1, I, 0, O)</span>
+                        </label>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-item">
+                            <label for="length">Password Length (8-256)</label>
+                            <input type="range" id="length" name="length" min="8" max="256" value="16">
+                            <span class="slider-value" id="lengthValue">16</span>
+                        </div>
+                        <div class="slider-item">
+                            <label for="minNumbers">Minimum Numbers</label>
+                            <input type="range" id="minNumbers" name="minNumbers" min="0" max="10" value="2">
+                            <span class="slider-value" id="minNumbersValue">2</span>
+                        </div>
+                        <div class="slider-item">
+                            <label for="minSymbols">Minimum Symbols</label>
+                            <input type="range" id="minSymbols" name="minSymbols" min="0" max="10" value="2">
+                            <span class="slider-value" id="minSymbolsValue">2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="output-section">
+                    <h2>Generated Password</h2>
+                    <div class="password-output">
+                        <input type="text" id="generatedPassword" readonly>
+                        <button type="button" id="copyButton">Copy to Clipboard</button>
+                    </div>
+                    <div class="strength-meter">
+                        <div class="strength-bar" id="strengthBar"></div>
+                        <span class="strength-text" id="strengthText">Strength: None</span>
+                    </div>
+                    <button type="button" id="generateButton">Generate Password</button>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <button id="themeToggle" aria-label="Toggle dark/light mode">
+                <span>🌙</span>
+            </button>
+            <p>Zero Pass - A secure, client-side password generator</p>
+        </footer>
+    </div>
+
+    <script src="js/zxcvbn.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
