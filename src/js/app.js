@@ -178,3 +178,155 @@ sliders.forEach(slider => {
         validateForm();
     });
 });
+
+// Sync input fields and sliders
+const syncInputs = {
+    'length': {
+        field: document.getElementById('length'),
+        slider: document.getElementById('lengthSlider')
+    },
+    'minNumbers': {
+        field: document.getElementById('minNumbers'),
+        slider: document.getElementById('minNumbersSlider')
+    },
+    'minSymbols': {
+        field: document.getElementById('minSymbols'),
+        slider: document.getElementById('minSymbolsSlider')
+    }
+};
+
+// Handle input field changes
+Object.entries(syncInputs).forEach(([key, { field, slider }]) => {
+    field.addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        const passwordLength = parseInt(document.getElementById('length').value);
+        
+        // Update max values based on password length and current values
+        if (key === 'minNumbers' || key === 'minSymbols') {
+            // Get checkbox states
+            const numbersChecked = document.querySelector('input[name="numbers"]').checked;
+            const symbolsChecked = document.querySelector('input[name="symbols"]').checked;
+            
+            // Get current values of both inputs
+            const currentNumbers = parseInt(document.getElementById('minNumbers').value) || 0;
+            const currentSymbols = parseInt(document.getElementById('minSymbols').value) || 0;
+            
+            // Calculate max value based on password length and current values
+            let max = passwordLength;
+            
+            // Subtract 1 for each required character type
+            if (key === 'minNumbers' && numbersChecked) {
+                max = Math.max(0, max - 1); // Can't go below 0
+            }
+            if (key === 'minSymbols' && symbolsChecked) {
+                max = Math.max(0, max - 1); // Can't go below 0
+            }
+            
+            // If both are checked, subtract 2
+            if (numbersChecked && symbolsChecked) {
+                max = Math.max(0, max - 2); // Can't go below 0
+            }
+            
+            // Adjust max based on current values of the other input
+            if (key === 'minNumbers') {
+                // For numbers, subtract current symbols value
+                max = Math.max(0, max - currentSymbols);
+            } else if (key === 'minSymbols') {
+                // For symbols, subtract current numbers value
+                max = Math.max(0, max - currentNumbers);
+            }
+            
+            // Ensure max doesn't exceed 256
+            max = Math.min(max, 256);
+            
+            field.max = max;
+            slider.max = max;
+            
+            // Ensure the current value doesn't exceed the new max
+            if (value > max) {
+                field.value = max;
+                slider.value = max;
+            }
+        }
+        
+        if (value >= field.min && value <= field.max) {
+            field.value = value;
+            slider.value = value;
+            validateForm();
+        }
+    });
+
+    // Handle slider changes
+    slider.addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        const passwordLength = parseInt(document.getElementById('length').value);
+        
+        // Update max values based on password length and current values
+        if (key === 'minNumbers' || key === 'minSymbols') {
+            // Get checkbox states
+            const numbersChecked = document.querySelector('input[name="numbers"]').checked;
+            const symbolsChecked = document.querySelector('input[name="symbols"]').checked;
+            
+            // Get current values of both inputs
+            const currentNumbers = parseInt(document.getElementById('minNumbers').value) || 0;
+            const currentSymbols = parseInt(document.getElementById('minSymbols').value) || 0;
+            
+            // Calculate max value based on password length and current values
+            let max = passwordLength;
+            
+            // Subtract 1 for each required character type
+            if (key === 'minNumbers' && numbersChecked) {
+                max = Math.max(0, max - 1); // Can't go below 0
+            }
+            if (key === 'minSymbols' && symbolsChecked) {
+                max = Math.max(0, max - 1); // Can't go below 0
+            }
+            
+            // If both are checked, subtract 2
+            if (numbersChecked && symbolsChecked) {
+                max = Math.max(0, max - 2); // Can't go below 0
+            }
+            
+            // Adjust max based on current values of the other input
+            if (key === 'minNumbers') {
+                // For numbers, subtract current symbols value
+                max = Math.max(0, max - currentSymbols);
+            } else if (key === 'minSymbols') {
+                // For symbols, subtract current numbers value
+                max = Math.max(0, max - currentNumbers);
+            }
+            
+            // Ensure max doesn't exceed 256
+            max = Math.min(max, 256);
+            
+            field.max = max;
+            slider.max = max;
+            
+            // Ensure the current value doesn't exceed the new max
+            if (value > max) {
+                field.value = max;
+                slider.value = max;
+            }
+        }
+        
+        field.value = value;
+        validateForm();
+    });
+
+    // Update max values when password length changes
+    document.getElementById('length').addEventListener('input', (e) => {
+        const passwordLength = parseInt(e.target.value);
+        
+        if (key === 'minNumbers' || key === 'minSymbols') {
+            const max = Math.min(passwordLength, 256);
+            field.max = max;
+            slider.max = max;
+            
+            // If current value exceeds new max, reduce it
+            if (parseInt(field.value) > max) {
+                field.value = max;
+                slider.value = max;
+            }
+        }
+    });
+});

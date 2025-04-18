@@ -42,21 +42,27 @@
                         </label>
                     </div>
 
-                    <div class="slider-group">
-                        <div class="slider-item">
+                    <div class="input-group">
+                        <div class="input-item">
                             <label for="length">Password Length (8-256)</label>
-                            <input type="range" id="length" name="length" min="8" max="256" value="16">
-                            <span class="slider-value" id="lengthValue">16</span>
+                            <div class="input-container">
+                                <input type="number" id="length" name="length" min="8" max="256" value="16" class="input-field">
+                                <input type="range" id="lengthSlider" min="8" max="256" value="16" class="slider">
+                            </div>
                         </div>
-                        <div class="slider-item">
-                            <label for="minNumbers">Minimum Numbers</label>
-                            <input type="range" id="minNumbers" name="minNumbers" min="0" max="10" value="2">
-                            <span class="slider-value" id="minNumbersValue">2</span>
+                        <div class="input-item">
+                            <label for="minNumbers">Minimum Numbers (0-10)</label>
+                            <div class="input-container">
+                                <input type="number" id="minNumbers" name="minNumbers" min="0" max="10" value="2" class="input-field">
+                                <input type="range" id="minNumbersSlider" min="0" max="10" value="2" class="slider">
+                            </div>
                         </div>
-                        <div class="slider-item">
-                            <label for="minSymbols">Minimum Symbols</label>
-                            <input type="range" id="minSymbols" name="minSymbols" min="0" max="10" value="2">
-                            <span class="slider-value" id="minSymbolsValue">2</span>
+                        <div class="input-item">
+                            <label for="minSymbols">Minimum Symbols (0-10)</label>
+                            <div class="input-container">
+                                <input type="number" id="minSymbols" name="minSymbols" min="0" max="10" value="2" class="input-field">
+                                <input type="range" id="minSymbolsSlider" min="0" max="10" value="2" class="slider">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,13 +71,17 @@
                     <h2>Generated Password</h2>
                     <div class="password-output">
                         <input type="text" id="generatedPassword" readonly>
-                        <button type="button" id="copyButton">Copy to Clipboard</button>
+                        <button type="button" id="copyButton" aria-label="Copy password to clipboard">
+                            <span class="copy-icon">📋</span>
+                        </button>
                     </div>
                     <div class="strength-meter">
                         <div class="strength-bar" id="strengthBar"></div>
                         <span class="strength-text" id="strengthText">Strength: None</span>
                     </div>
-                    <button type="button" id="generateButton">Generate Password</button>
+                    <div class="button-container">
+                        <button type="button" id="generateButton">Generate Password</button>
+                    </div>
                 </div>
             </form>
         </main>
